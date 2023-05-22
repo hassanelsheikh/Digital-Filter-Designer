@@ -267,8 +267,20 @@ const s = (p5_inst) => {
         }
 
         addItem(p, mode) {
-            if (mode == Mode.ZERO) this.#addZero(p)
-            else if (mode == Mode.POLE) this.#addPole(p)
+            if (mode == Mode.ZERO)
+            {
+                this.#addZero(p)
+                console.log(isChecked)
+                if(isChecked)
+                {
+                this.#addConjugateZero(p)
+                } 
+            } 
+            else if (mode == Mode.POLE)
+            {
+                this.#addPole(p)
+                if(isChecked) this.#addConjugatePole(p)
+            } 
             curr_picked = NONE_PICKED
         }
 
@@ -330,6 +342,13 @@ function changeMode(e){
     }
 }
 
+let isChecked = false;
+
+// Function to handle the checkbox change event
+function handleCheckboxChange(event) {
+  isChecked = event.target.checked;
+}
+
 document.getElementById('clear').addEventListener('click', () => filter_plane.clearAll())
 
 document.querySelectorAll('.mode-control').forEach(item => {
@@ -340,7 +359,7 @@ document
     .querySelector('#remove')
     .addEventListener('click', () => filter_plane.remove(curr_picked.index))
 
-
+document.getElementById('conj').addEventListener('change', handleCheckboxChange);
 
 let filterCanvas = new p5(s, 'circle-canvas')
 

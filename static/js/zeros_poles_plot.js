@@ -75,7 +75,7 @@ const s = (p5_inst) => {
 
         }
         updateFilterDesign(filter_plane.getZerosPoles(radius))
-        updateAllPassCoeff()
+        // updateAllPassCoeff()
         drawCursor()
         p5_inst.redraw()
     }
@@ -96,9 +96,14 @@ const s = (p5_inst) => {
     function drawPoints() {
         filter_plane.items.forEach(({ point, conjugate }) => {
             if (point == curr_picked.item.point) {
+
                 point.draw(undefined, undefined, (picked = true))
+                
             }
             else {
+                if (isChecked){
+                    conjugate.draw()
+                }
                 point.draw()
             }
 
@@ -202,6 +207,7 @@ const s = (p5_inst) => {
             p5_inst.fill(fill)
             p5_inst.circle(this.center.x, this.center.y, size)
             p5_inst.pop()
+            
         }
 
         getConjugate() {
@@ -258,6 +264,7 @@ const s = (p5_inst) => {
             this.items.forEach(({ point, conjugate }) => {
                 let pointPosition = point.getRelativePosition(max)
                 let conjugatePosition = conjugate?.getRelativePosition(max)
+                
                 let positions =
                     point instanceof Zero ? zerosPositions : polesPositions
                 positions.push(pointPosition)
@@ -270,7 +277,6 @@ const s = (p5_inst) => {
             if (mode == Mode.ZERO)
             {
                 this.#addZero(p)
-                console.log(isChecked)
                 if(isChecked)
                 {
                 this.#addConjugateZero(p)

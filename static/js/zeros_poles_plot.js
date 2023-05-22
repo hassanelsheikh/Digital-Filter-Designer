@@ -280,6 +280,11 @@ const s = (p5_inst) => {
             p5_inst.redraw()
         }
 
+        clearAll() {
+            this.items = [];
+            p5_inst.redraw();
+        }
+
         #addZero(p) {
             if (Math.abs(unit_circle_center.y - p.y) > 5){
                 this.#addConjugateZero(p)
@@ -325,6 +330,8 @@ function changeMode(e){
     }
 }
 
+document.getElementById('clear').addEventListener('click', () => filter_plane.clearAll())
+
 document.querySelectorAll('.mode-control').forEach(item => {
     item.addEventListener('click', changeMode)
 })
@@ -332,6 +339,8 @@ document.querySelectorAll('.mode-control').forEach(item => {
 document
     .querySelector('#remove')
     .addEventListener('click', () => filter_plane.remove(curr_picked.index))
+
+
 
 let filterCanvas = new p5(s, 'circle-canvas')
 

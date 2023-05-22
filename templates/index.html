@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="../static/js/p5.min.js"></script>
+
+    <link rel="stylesheet" href="../static/css/index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Digital Filter  </title>
+
+</head>
+<body>
+    <div class="element div2" > 
+        <div class="toggle-div" id="design-unit-circle" style="margin-right: 10px;">
+        <div id='circle-control' class="button-element" onclick="toggleas(this)">
+            <button id= "zero" class="btn-cricle-control mode-control">Add Zeros</button>
+        </div>
+        <div class="button-element dark-button" onclick="toggleas(this)">
+        <button id="pole" class="btn-cricle-control mode-control" >Add Poles</button>
+        </div>
+
+        </div>
+        <div  class="button-remove" onclick="remove(this)" style="margin-left: 10px;">
+            <button id="remove" ><i class="fa-solid fa-trash"></i></button>
+        </div>
+
+    </div>
+
+    
+    <div class="element div3" id="circle-canvas"> 
+	</div>
+
+    <div class="element div6 lightel">
+		<h2>Phase Response</h2>
+		<div id="filter-phase-response" class="response-plotting"> </div>
+	</div>
+
+	<div class="element div7 darkel">
+		<h2>Magnitude Response</h2>
+
+		<div id="filter-mag-response" class="response-plotting"> </div>
+	</div>
+
+
+    <script src="../static/js/zeros_poles_plot.js"></script>
+
+</body>
+
+</html>

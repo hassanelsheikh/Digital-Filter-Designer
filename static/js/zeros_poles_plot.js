@@ -302,6 +302,33 @@ const s = (p5_inst) => {
             this.items = [];
             p5_inst.redraw();
         }
+         
+
+        clearp(){
+                 
+            for (let key in this.items) {
+                if (this.items.hasOwnProperty(key) && this.items[key].point instanceof Pole && this.items[key].conjugate instanceof Pole) {
+               
+                 this.items.splice(key,1);
+}
+              }
+
+              p5_inst.redraw();
+
+          }
+
+        clearz(){
+            for (let key in this.items) {
+                if (this.items.hasOwnProperty(key) && this.items[key].point instanceof Zero && this.items[key].conjugate instanceof Zero) {
+               
+                 this.items.splice(key,1);
+
+                }
+              }
+             console.log(this.items);
+
+              p5_inst.redraw();
+        }
 
         #addZero(p) {
             if (Math.abs(unit_circle_center.y - p.y) > 5){
@@ -356,6 +383,9 @@ function handleCheckboxChange(event) {
 }
 
 document.getElementById('clear').addEventListener('click', () => filter_plane.clearAll())
+document.getElementById('clearzeros').addEventListener('click', () => filter_plane.clearz())
+document.getElementById('clearpoles').addEventListener('click', () => filter_plane.clearp())
+
 
 document.querySelectorAll('.mode-control').forEach(item => {
     item.addEventListener('click', changeMode)

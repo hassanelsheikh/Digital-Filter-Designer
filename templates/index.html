@@ -48,10 +48,20 @@
     
     <div class="element div3" id="circle-canvas"> 
 	</div>
+    <div>
+        <div class="upload">
+            <label for="sig" class="file-upload-button">Browse Signal</label>
+            <input type="file"
+                   id="sig" name="signal"
+                   accept=".xlsx, .xls, .csv" oninput="importSignal()">
+        </div><br>
+    </div>
+
 
     <div class="element div6 lightel">
 		<h2>Phase Response</h2>
 		<div id="filter-phase-response" class="response-plotting"> </div>
+         
 	</div>
 
 	<div class="element div7 darkel">
@@ -63,6 +73,7 @@
 
     <script src="../static/js/zeros_poles_plot.js"></script>
     <script src="../static/js/front_to_back.js"></script>
+    <script src="../static/js/imported_sig.js"></script>
 
 
 </body>

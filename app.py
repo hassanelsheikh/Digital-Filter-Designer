@@ -41,5 +41,23 @@ def getFrequencyResponce():
         totalpoles= pole+allpasspoles
     return jsonify(response_data)
 
+@app.route('/getAllPassFilter', methods=['POST', 'GET'])
+def getAllPassFilterData():
+    count=0
+    if request.method == 'POST':
+        data = json.loads(request.data)
+        logic.allPassCoeffients = data['a']
+        for a in logic.allPassCoeffients:
+            logic.allPassCoeffients[count]= logic.convert(a)
+            count+=1
+        w, filter_angles = logic.getAllPassFrequencyResponse()
+        response_data = {
+            'w': w.tolist(),
+            'angels': filter_angles.tolist(),
+        }
+        return jsonify(response_data)
+    else:
+        return 'There is no Post request'
+
 if __name__ == '__main__':
     app.run(debug=True)

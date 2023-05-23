@@ -6,74 +6,199 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="../static/js/p5.min.js"></script>
+    <script  src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/d3.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
+    <link rel="icon" href="..\static\assests\favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../static/css/index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+
+        <!-- swiper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Digital Filter  </title>
 
 </head>
 <body>
-    <div class="element div2" > 
-        <div class="toggle-div" id="design-unit-circle" style="margin-right: 10px;">
-        <div id='circle-control' class="button-element">
-            <button id= "zero" class="btn-cricle-control mode-control">Add Zeros</button>
-        </div>
-        <div class="button-element dark-button">
-        <button id="pole" class="btn-cricle-control mode-control" >Add Poles</button>
-        </div>
+    
 
-        </div>
-        <div  class="button-remove" onclick="remove(this)" style="margin-left: 10px;">
-            <button id="remove" >Delete</button>
-        </div>
-        <div  class="button-clear" style="margin-left: 10px;">
-            <button id="clear" >Clear All</button>
-        </div>
-        <div  class="button-clear" style="margin-left: 10px;">
-            <button id="clearzeros" >Clear zeros</button>
-        </div>
-        <div  class="button-clear" style="margin-left: 10px;">
-            <button id="clearpoles" >Clear poles</button>
-        </div>
-        <div  class="button-conj" style="margin-left: 10px;">
-            <input type="checkbox" id="conj">
-            <label for="conj">Conjucate</label>
-        </div>
+    <nav class="fixed-top navbar-top bg-dark" id="nav">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+         
+            <li class="nav-item">
+                <a class="nav-link text-light" id="filter-tab" data-toggle="tab" role="tab" onclick="opentab()"> Apply All Pass Filter</a>
+            </li>
+          
+        </ul>
+        
+    </nav> 
 
+
+<div id="bod">
+
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closetab()">&times;</a>
+        <div class="overlay-content">
+            <div class="apfres">
+                <div id="form">
+                    <form class="login-form"  action="javascript:void(0);">
+                        <h1> a </h1>
+                        <div class="form-input-material">
+                        <input type="number"  id="real" name="real" placeholder="Real" autocomplete="off" class="form-control-material"  />
+                        </div>
+                        <div class="form-input-material">
+                        <input type="number"  id="imaginary" name="imaginary" placeholder="Imaginary" autocomplete="off" class="form-control-material"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-ghost" id="formbtn" onclick="review()" >Review</button>
+                        <button type="submit" class="btn btn-primary btn-ghost" id="formbtn" onclick="addItem([],1)" >Apply</button>
+                    </form>
+                </div>
+    
+                <div class="content" id="filteredphaseres"></div>
+                <div id="apflist">
+                    <ul id="list"></ul>
+                </div>
+    
+                
+            </div>
+    
+    
+            <div class="slidercontainer">
+    
+                <div class="swiper_wrap">
+                    <div class="slider-wrapper">
+                        <div class="swiper-button-prev"></div>
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" id="phase1">
+                                        <img src="..\static\assets\apfphase\(a = -0.5).png" onclick="addItem([1,1],0)">
+                                        <div class="avalue">a = 1 + j 1</div>
+                                    </div>
+                                    <div class="swiper-slide" id="phase2">
+                                        <img src="..\static\assets\apfphase\(a = 0.1).png"onclick="addItem([0.1,0],0)">
+                                        <div class="avalue">a = 0.1 </div>
+    
+    
+                                    </div>
+                                    <div class="swiper-slide" id="phase3" >
+                                        <img src="..\static\assets\apfphase\(a = 0.5).png" onclick="addItem([0.5,0],0)">
+                                        <div class="avalue">a = 0.5</div>
+    
+                                       
+                                    </div>
+                                    <div class="swiper-slide" id="phase4">
+                                        <img src="..\static\assets\apfphase\(a = 0.9).png" onclick="addItem([0.9,0] , 0)">
+                                        <div class="avalue">a = 0.9</div>
+    
+    
+                                    </div>
+                                    <div class="swiper-slide" id="phase5">
+                                        <img src="..\static\assets\apfphase\(a = -0.5).png" onclick="addItem([-0.5,0],0)">
+                                        <div class="avalue">a = -0.5</div>
+    
+    
+                                    </div>
+                                    <div class="swiper-slide"id="phase6">
+                                        <img src="..\static\assets\apfphase\(a = -0.9).png" onclick="addItem([-0.9,0],0)">
+                                        <div class="avalue">a = -0.9</div>
+                                    </div>
+                                   
+                                </div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        <div class="swiper-button-next"></div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+
+    <div class="cir_container" id="cir">
+    
+    <div id="cont">
+        <div class="element_div2" > 
+            <div class="toggle-div" id="design-unit-circle" style="margin-right: 10px;">
+            <div id='circle-control' class="button-element">
+                <button id= "zero" class="btn-cricle-control mode-control">Add Zeros</button>
+            </div>
+            <div class="button-element dark-button">
+            <button id="pole" class="btn-cricle-control mode-control" >Add Poles</button>
+            </div>
+    
+            </div>
+            <div  class="button-remove" onclick="remove(this)" style="margin-left: 10px;">
+                <button id="remove" >Delete</button>
+            </div>
+            <div  class="button-clear" style="margin-left: 10px;">
+                <button id="clear" >Clear All</button>
+            </div>
+            <div  class="button-clear" style="margin-left: 10px;">
+                <button id="clearzeros" >Clear zeros</button>
+            </div>
+            <div  class="button-clear" style="margin-left: 10px;">
+                <button id="clearpoles" >Clear poles</button>
+            </div>
+            <div  class="button-conj" style="margin-left: 10px;">
+                <input type="checkbox" id="conj">
+                <label for="conj">Conjucate</label>
+            </div>
+    
+        </div>
+    
+        
+        <div class="element_div3" id="circle-canvas"> 
+        </div>
+    
+    
+    
+    
+        
+        <div id="mag-phase">
+            <div class="element div6 lightel">
+                <h2>Phase Response</h2>
+                <div id="filter-phase-response" class="response-plotting"> </div>
+                 
+            </div>
+        
+            <div class="element_div7_darkel">
+                <h2>Magnitude Response</h2>
+        
+                <div id="filter-mag-response" class="response-plotting"> </div>
+            </div>
+        </div>
+        
     </div>
 
     
-    <div class="element div3" id="circle-canvas"> 
-	</div>
-    <div>
-        <div class="upload">
-            <label for="sig" class="file-upload-button">Browse Signal</label>
-            <input type="file"
-                   id="sig" name="signal"
-                   accept=".xlsx, .xls, .csv" oninput="importSignal()">
-        </div><br>
-    </div>
+    
 
+</div>
+  
+<div>
+    <div class="upload">
+        <label for="sig" class="file-upload-button">Browse Signal</label>
+        <input type="file"
+               id="sig" name="signal"
+               accept=".xlsx, .xls, .csv" oninput="importSignal()">
+    </div><br>
+</div>
 
-    <div class="element div6 lightel">
-		<h2>Phase Response</h2>
-		<div id="filter-phase-response" class="response-plotting"> </div>
-         
-	</div>
-
-	<div class="element div7 darkel">
-		<h2>Magnitude Response</h2>
-
-		<div id="filter-mag-response" class="response-plotting"> </div>
-	</div>
+</div>
 
 
     <script src="../static/js/zeros_poles_plot.js"></script>
     <script src="../static/js/front_to_back.js"></script>
     <script src="../static/js/imported_sig.js"></script>
+    <script src="../static\js\All_pass_filter.js"></script>
 
 
 </body>

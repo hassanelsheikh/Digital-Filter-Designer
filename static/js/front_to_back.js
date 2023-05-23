@@ -1,5 +1,36 @@
 const filterDesignMagnitude = document.querySelector('#filter-mag-response')
 const filterDesignPhase = document.querySelector('#filter-phase-response')
+layout ={
+    paper_bgcolor:"white",
+    plot_bgcolor:"white",
+    autosize: false,
+    width:400,
+    height:250,
+
+    margin: {
+      l: 30,
+      r: 0,
+      b: 20,
+      t: 10,
+      pad: 0
+    }
+}
+Plotly.newPlot(
+    filterDesignMagnitude,
+    [{ x: [], y: [], line: { color: 'red' } } ],
+    layout,
+   { staticPlot: true })
+    
+Plotly.newPlot(
+    filterDesignPhase,
+    [{ x: [], y: [], line: { color: 'red' } }, ],
+    layout,
+   { staticPlot: true })
+
+
+
+
+
 
 
 async function postData(url = '', data = {}) {
@@ -20,41 +51,13 @@ async function updateFilterDesign(data) {
    Plotly.newPlot(
         filterDesignMagnitude,
         [{ x: w, y: magnitude, line: { color: 'red' } } ],
-        {
-            paper_bgcolor:"#efefef",
-            plot_bgcolor:"#efefef",
-            autosize: false,
-            width:400,
-            height:250,
-
-            margin: {
-              l: 30,
-              r: 0,
-              b: 20,
-              t: 10,
-              pad: 0
-            }
-        },
+        layout,
        { staticPlot: true })
         
     Plotly.newPlot(
         filterDesignPhase,
         [{ x: w, y: angels, line: { color: 'red' } }, ],
-        {
-            paper_bgcolor:"#f4f4f4",
-            plot_bgcolor:"#f4f4f4",
-            autosize: false,
-            width:400,
-            height:250,
-
-            margin: {
-              l: 30,
-              r: 0,
-              b: 20,
-              t: 10,
-              pad: 0
-            }
-        },
+        layout,
        { staticPlot: true })
   
 }

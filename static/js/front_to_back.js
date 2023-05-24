@@ -1,5 +1,6 @@
 const filterDesignMagnitude = document.querySelector('#filter-mag-response')
 const filterDesignPhase = document.querySelector('#filter-phase-response')
+
 layout ={
     paper_bgcolor:"white",
     plot_bgcolor:"white",
@@ -47,7 +48,7 @@ async function postData(url = '', data = {}) {
 
 async function updateFilterDesign(data) {
     data.gain = 1
-    // console.log(data);
+     console.log("data");
     let { w, angels, magnitude } = await postData(`${API}/getFilter`, data)
    Plotly.newPlot(
         filterDesignMagnitude,
@@ -60,12 +61,11 @@ async function updateFilterDesign(data) {
         [{ x: w, y: angels, line: { color: 'red' } }, ],
         layout,
        { staticPlot: true })
-    //    const final =document.getElementById('finalfilteredphaseres');
-    //            Plotly.newPlot(
-    //             final,
-    //             [{ x: w, y: angels, line: { color: 'red' } }, ],
-    //             layout,
-    //            { staticPlot: true })
+       Plotly.newPlot(
+        final,
+        [{ x: w, y: angels, line: { color: 'red' } }, ],
+        layout,
+       { staticPlot: true })
 
   
 }

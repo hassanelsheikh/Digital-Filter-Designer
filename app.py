@@ -39,8 +39,8 @@ def getFrequencyResponce():
         # zero,pole,k= logic.getfrompair()
         # print(zero)
         # print(pole)
-        # totalzeros= zero+allpasszeros
-        # totalpoles= pole+allpasspoles
+        totalzeros= logic.zeros
+        totalpoles= logic.poles
         
     return jsonify(response_data)
 
@@ -90,8 +90,15 @@ def modifiefilter():
         p = jsonData['p']
         z = [complex(x[0], x[1]) for x in z]
         p = [complex(x[0], x[1]) for x in p]
-        logic.zeros=logic.zeros+z
-        logic.poles=logic.poles+p
+        logic.zeros=(logic.zeros)+z
+        logic.poles=(logic.poles)+p
+                
+                
+
+        
+        
+        
+
         logic.gain=1
         w, h_phase, magnitude = logic.frequencyResponse()
 

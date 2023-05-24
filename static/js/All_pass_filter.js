@@ -42,13 +42,13 @@ function opentab() {
   }
 
 
-function opentab() {
-    document.getElementById("myNav").style.height = "90%";
-  }
+// function opentab() {
+//     document.getElementById("myNav").style.height = "90%";
+//   }
   
-  function closetab() {
-    document.getElementById("myNav").style.height = "0%";
-  }
+//   function closetab() {
+//     document.getElementById("myNav").style.height = "0%";
+//   }
 
 
 var swiper = new Swiper('.swiper-container', {
@@ -271,13 +271,12 @@ async function updateFilterPhase(allPassCoeff){
               
             },
         });
-        console.log(w)
         Plotly.newPlot(
             final,
             [{ x: w, y: y_phase, line: { color: 'red' } }, ],
             layout,
            { staticPlot: true })
-
+           
            Plotly.newPlot(
             filterDesignPhase,
             [{ x: w, y: y_phase, line: { color: 'red' } }, ],

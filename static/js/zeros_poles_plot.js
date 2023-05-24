@@ -5,6 +5,7 @@ const CANVAS_SIZE = 300
 const NONE_PICKED = { item: {point: null, conjugate: null}, index: -1 }
 const Mode = { ZERO : 0, POLE : 1, CONJ_ZERO : 2, CONJ_POLE : 3 }
 const Conj_Modes = {2: Mode.CONJ_ZERO, 3: Mode.CONJ_POLE}
+const nav=document.getElementById("myNav").style.height;
 const API = "http://127.0.0.1:5000/"
 
 const modesMap = {
@@ -48,7 +49,7 @@ const s = (p5_inst) => {
     }
 
     p5_inst.mouseClicked = function () {
-        updateFilterDesign(filter_plane.getZerosPoles(radius))
+        // updateFilterDesign(filter_plane.getZerosPoles(radius))
         // updateAllPassCoeff()
         p5_inst.noLoop()
         return true
@@ -106,6 +107,8 @@ const s = (p5_inst) => {
                     conjugate.draw()}
                 }
                 point.draw()
+                updateFilterDesign(filter_plane.getZerosPoles(radius))
+
             }
 
         })

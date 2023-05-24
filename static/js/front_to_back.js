@@ -61,11 +61,11 @@ async function updateFilterDesign(data) {
         layout,
        { staticPlot: true })
        const final =document.getElementById('finalfilteredphaseres');
-       Plotly.newPlot(
-        final,
-        [{ x: w, y: angels, line: { color: 'red' } }, ],
-        layout,
-       { staticPlot: true })
+    //    Plotly.newPlot(
+    //     final,
+    //     [{ x: w, y: angels, line: { color: 'red' } }, ],
+    //     layout,
+    //    { staticPlot: true })
 
   
 }

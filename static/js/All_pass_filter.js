@@ -269,6 +269,7 @@ async function updateFilterPhase(allPassCoeff){
               
             },
         });
+        console.log(w)
         Plotly.newPlot(
             final,
             [{ x: w, y: y_phase, line: { color: 'red' } }, ],

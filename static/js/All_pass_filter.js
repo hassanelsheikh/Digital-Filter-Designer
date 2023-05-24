@@ -297,11 +297,12 @@ async function updateFilterPhase(allPassCoeff){
             success: function(data) {
               w = data[0];
               y_phase = data[1];
+              Plotly.newPlot(
+                final,
+                [{ x: w, y: y_phase, line: { color: 'red' } }, ],
+                layout,
+               { staticPlot: true })
             },
         });
-        Plotly.newPlot(
-            final,
-            [{ x: w, y: y_phase, line: { color: 'red' } }, ],
-            layout,
-           { staticPlot: true })
+
     }      

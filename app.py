@@ -104,17 +104,22 @@ def modifiefilter():
 def deletecomp():
     if request.method == 'POST':
         jsonData = request.get_json()
-        z = jsonData[0]
-        p = jsonData[1]
+        zeros = jsonData['zeros']
+        poles = jsonData['poles']
+
+        print(zeros)
+        print(logic.zeros)
 
         # Delete zeros from logic.zeros
-        logic.zeros = [zero for zero in logic.zeros if zero != z]
+        logic.zeros = [zero for zero in logic.zeros if zero not in zeros]
 
         # Delete poles from logic.poles
-        logic.poles = [pole for pole in logic.poles if pole != p]
-        
+        logic.poles = [pole for pole in logic.poles if pole not in poles]
+
         w, h_phase, magnitude = logic.frequencyResponse()
-        return [w.tolist(),  h_phase.tolist()]
+        return [w.tolist(), h_phase.tolist()]
+
+
         
 
 if __name__ == '__main__':

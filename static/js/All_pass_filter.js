@@ -284,6 +284,24 @@ async function updateFilterPhase(allPassCoeff){
            { staticPlot: true })
       }
 
-function deleteA(a1,a2){
-
-}      
+    function deleteA(zeros,poles){
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:5000//delete',
+            data: JSON.stringify({zeros, poles}),
+            cache: false,
+            dataType: 'json',
+            async: false,
+            contentType: 'application/json',
+            processData: false,
+            success: function(data) {
+              w = data[0];
+              y_phase = data[1];
+            },
+        });
+        Plotly.newPlot(
+            final,
+            [{ x: w, y: y_phase, line: { color: 'red' } }, ],
+            layout,
+           { staticPlot: true })
+    }      

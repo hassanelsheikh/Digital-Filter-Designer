@@ -92,13 +92,6 @@ def modifiefilter():
         p = [complex(x[0], x[1]) for x in p]
         logic.zeros=(logic.zeros)+z
         logic.poles=(logic.poles)+p
-                
-                
-
-        
-        
-        
-
         logic.gain=1
         w, h_phase, magnitude = logic.frequencyResponse()
 
@@ -107,10 +100,22 @@ def modifiefilter():
         
 
         
-    
-    
-    
-    
+@app.route('/delete', methods=['POST'])
+def deletecomp():
+    if request.method == 'POST':
+        jsonData = request.get_json()
+        z = jsonData[0]
+        p = jsonData[1]
+
+        # Delete zeros from logic.zeros
+        logic.zeros = [zero for zero in logic.zeros if zero != z]
+
+        # Delete poles from logic.poles
+        logic.poles = [pole for pole in logic.poles if pole != p]
+        
+        w, h_phase, magnitude = logic.frequencyResponse()
+        return [w.tolist(),  h_phase.tolist()]
+        
 
 if __name__ == '__main__':
     app.run(debug=True)

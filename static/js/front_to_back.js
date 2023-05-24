@@ -59,6 +59,13 @@ async function updateFilterDesign(data) {
         [{ x: w, y: angels, line: { color: 'red' } }, ],
         layout,
        { staticPlot: true })
+       const final =document.getElementById('finalfilteredphaseres');
+       Plotly.newPlot(
+        final,
+        [{ x: w, y: angels, line: { color: 'red' } }, ],
+        layout,
+       { staticPlot: true })
+
   
 }
 

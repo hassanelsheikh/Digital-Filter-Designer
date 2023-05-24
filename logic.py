@@ -8,7 +8,9 @@ class Logic():
         self.poles=[]
         self.gain = 0.5
         self.allPassCoeffients= []
-
+        
+        
+        
     def frequencyResponse(self):
         # w is The frequencies at which h was computed. By default, w is normalized to the range [0, pi).
         # h is The frequency response, as complex numbers.

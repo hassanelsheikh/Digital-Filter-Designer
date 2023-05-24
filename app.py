@@ -58,6 +58,49 @@ def getAllPassFilterData():
         return jsonify(response_data)
     else:
         return 'There is no Post request'
+    
+    
+@app.route('/digitalFilter', methods=['POST'])   #filter reviewer function
+def digitalFilter():
+    jsonData = request.get_json()
+    z = jsonData['zerosvalues']
+    p = jsonData['polesvalues']
+    flag = jsonData['flag']
+    z = [complex(x[0], x[1]) for x in z]
+    p = [complex(x[0], x[1]) for x in p]
+    
+    alp_review = Logic()
+    alp_review.zeros = z
+    alp_review.poles = p
+    alp_review.gain = 1
+    w, h_phase, magnitude = alp_review.frequencyResponse()
+
+    
+    return [w.tolist(),  h_phase.tolist()]     
+    
+    
+@app.route('/getphase_correctors', methods=['POST'])
+def modifiefilter():
+    if request.method == 'POST':
+        jsonData = request.get_json()
+        z = jsonData['z']
+        p = jsonData['p']
+        z = [complex(x[0], x[1]) for x in z]
+        p = [complex(x[0], x[1]) for x in p]
+        logic.zeros=logic.zeros+z
+        logic.poles=logic.poles+p
+        logic.gain=1
+        w, h_phase, magnitude = logic.frequencyResponse()
+
+    
+        return [w.tolist(),  h_phase.tolist()]
+        
+
+        
+    
+    
+    
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -102,7 +102,8 @@ const s = (p5_inst) => {
             }
             else {
                 if (isChecked){
-                    conjugate.draw()
+                    if(conjugate){
+                    conjugate.draw()}
                 }
                 point.draw()
             }
@@ -399,54 +400,53 @@ document.getElementById('conj').addEventListener('change', handleCheckboxChange)
 
 let filterCanvas = new p5(s, 'circle-canvas')
 
-async function download(data){
-    let points = { ze, po } =  await postData(`${API}/getZerosAndPoles`, data)
-    downloadCsv("filter.csv", json2csv.parse(points));
-    function downloadCsv(filename, csvData) {
-        const element = document.createElement("a");
+// async function download(data){
+//     let points = { ze, po } =  await postData(`${API}/getZerosAndPoles`, data)
+//     downloadCsv("filter.csv", json2csv.parse(points));
+//     function downloadCsv(filename, csvData) {
+//         const element = document.createElement("a");
 
-        element.setAttribute("href", `data:text/csv;charset=utf-8,${csvData}`);
-        element.setAttribute("download", filename);
-        element.style.display = "none";
+//         element.setAttribute("href", `data:text/csv;charset=utf-8,${csvData}`);
+//         element.setAttribute("download", filename);
+//         element.style.display = "none";
 
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-    }
-}
+//         document.body.appendChild(element);
+//         element.click();
+//         document.body.removeChild(element);
+//     }
+// }
 
 
 
 
  
-function importfilter(){
-    var poles=[];
-    var zeros=[]; 
-    var file= document.getElementById("csv2").files[0]
-        Papa.parse(file, {
-            header : true,
-            skipEmptyLines: true,
-            complete : function(results, file) {  
-                for (i=0; i< results.data.length; i++){
-                    poles.push(results.data[i].poles);
-                    zeros.push(results.data[i].zeros);
+// function importfilter(){
+//     var poles=[];
+//     var zeros=[]; 
+//     var file= document.getElementById("csv2").files[0]
+//         Papa.parse(file, {
+//             header : true,
+//             skipEmptyLines: true,
+//             complete : function(results, file) {  
+//                 for (i=0; i< results.data.length; i++){
+//                     poles.push(results.data[i].poles);
+//                     zeros.push(results.data[i].zeros);
 
-                }
-                const strparsedpoles= poles;
-                const strparsedzeroes= zeros;
-                console.log(strparsedpoles);
-                console.log(strparsedzeroes);
-                var arrayparsedpoles = '{"key": '+strparsedpoles+'}';
-                var arrayparsedzeros = '{"key": '+strparsedzeroes+'}';
-                console.log(arrayparsedpoles);
-                const polesobj= JSON.parse(arrayparsedpoles);
-                const zerosobj= JSON.parse(arrayparsedzeros);
-                const finalpoles= polesobj.key;
-                const finalzeros= zerosobj.key;
+//                 }
+//                 const strparsedpoles= poles;
+//                 const strparsedzeroes= zeros;
+//                 console.log(strparsedpoles);
+//                 console.log(strparsedzeroes);
+//                 var arrayparsedpoles = '{"key": '+strparsedpoles+'}';
+//                 var arrayparsedzeros = '{"key": '+strparsedzeroes+'}';
+//                 console.log(arrayparsedpoles);
+//                 const polesobj= JSON.parse(arrayparsedpoles);
+//                 const zerosobj= JSON.parse(arrayparsedzeros);
+//                 const finalpoles= polesobj.key;
+//                 const finalzeros= zerosobj.key;
               
-                points = {zeros : finalzeros, poles : finalpoles};
-                updateFilterDesign(points)
-            }
-                }); 
-};
-// 
+//                 points = {zeros : finalzeros, poles : finalpoles};
+//                 updateFilterDesign(points)
+//             }
+//                 }); 
+// };

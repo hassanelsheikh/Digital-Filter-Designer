@@ -235,6 +235,11 @@ img {
     background-color: rgba(0,0,0, 0.9);
     overflow-y: hidden;
     transition: 0.5s;
+    pointer-events: auto;
+
+  }
+  body.overlay {
+    pointer-events: none;
   }
   
   .overlay-content {

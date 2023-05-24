@@ -1,5 +1,7 @@
 const allPassPhase = document.getElementById('filteredphaseres');
 const final =document.getElementById('finalfilteredphaseres');
+// const filterDesignPhase = document.querySelector('#filter-phase-response')
+
 const checkList = document.getElementById('apflist');
 let p=[];
 let z=[];
@@ -275,8 +277,13 @@ async function updateFilterPhase(allPassCoeff){
             [{ x: w, y: y_phase, line: { color: 'red' } }, ],
             layout,
            { staticPlot: true })
-      }
 
+           Plotly.newPlot(
+            filterDesignPhase,
+            [{ x: w, y: y_phase, line: { color: 'red' } }, ],
+            layout,
+           { staticPlot: true })
+      }
 
 function deleteA(a1,a2){
 

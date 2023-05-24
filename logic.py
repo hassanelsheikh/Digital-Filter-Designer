@@ -81,6 +81,8 @@ class Logic():
             if check!= -1:
                 pole[cnt2]= p
                 cnt2+=1
+        # zero= (len(self.zeros))*[0]
+        # pole= (len(self.zeros))*[0]
         return zero,pole,k
 
 

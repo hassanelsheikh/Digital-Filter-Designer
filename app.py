@@ -36,9 +36,12 @@ def getFrequencyResponce():
                 'angels': filterangles.tolist(),
                 'magnitude': magnitude.tolist()
             }
-        zero,pole,k= logic.getfrompair()
-        totalzeros= zero+allpasszeros
-        totalpoles= pole+allpasspoles
+        # zero,pole,k= logic.getfrompair()
+        # print(zero)
+        # print(pole)
+        # totalzeros= zero+allpasszeros
+        # totalpoles= pole+allpasspoles
+        
     return jsonify(response_data)
 
 @app.route('/getAllPassFilter', methods=['POST', 'GET'])

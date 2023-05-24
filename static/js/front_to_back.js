@@ -47,6 +47,7 @@ async function postData(url = '', data = {}) {
 
 async function updateFilterDesign(data) {
     data.gain = 1
+    // console.log(data);
     let { w, angels, magnitude } = await postData(`${API}/getFilter`, data)
    Plotly.newPlot(
         filterDesignMagnitude,

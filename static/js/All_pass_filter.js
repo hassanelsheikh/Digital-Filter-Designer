@@ -107,7 +107,38 @@ function addItem2(a,n){
     
     const close = document.querySelectorAll('span');
     const txt = document.querySelectorAll('li');
+    for(let i=0; i<close.length;i++){
+        close[i].addEventListener('click',()=>{
+            close[i].parentElement.style.opacity = 0;
+            let s = txt[i+1].innerHTML;
+            let string = s.replace(/[a+=<spn>×</spn> ]/g, '');
+            string=string.replace(/[j]/g, ',');
+            let k ;
+            for(let i =0; i<string.length;i++){
+                if(string[i]==','){k=i;
+                break;}
+            } 
+            r = parseFloat(string.substring(0,k));
+            im=parseFloat(string.substring(k+1,string.length));
+             console.log("r"+r);
+             console.log("i"+im);
 
+            let a = getapfzap(r,im);
+            let z = getvalues(a[0]);
+            let p = getvalues(a[1]);
+           deleteA(z,p);//to be done bas ana msh ader
+            
+            
+
+
+
+            setTimeout(()=>{
+                close[i].parentElement.style.display = "none";
+
+            },500)
+
+        })
+    }
     real.value="";
     imaginary.value = "";
     applyAPF([x,y]);
@@ -149,13 +180,14 @@ async function updateFilterPhase(allPassCoeff){
         flag = 'review'
         console.log(real);
         let apf  =getapfzap(real,imaginary);
-        console.log(apf[0]);
-        console.log(apf[1]);
+        // console.log(apf[0]);
+        // console.log(apf[1]);
+
       
         let polesvalues = [getvalues(apf[1])];
         let zerosvalues = [getvalues(apf[0])];
-        console.log(polesvalues);
-        console.log(zerosvalues);
+        // console.log(polesvalues);
+        // console.log(zerosvalues);
         let w=[];let y_phase=[];
       
         $.ajax({
@@ -206,11 +238,20 @@ async function updateFilterPhase(allPassCoeff){
 
       function applyAPF(a){
 
-        let sq= a[0]*a[0]+a[1]*a[1];
-        p.push([(a[0]*100 + 150),(150 - a[1]*100)]);
-        let real = a[0] / sq ;
-        let imj =  a[1] / sq ;
-        z.push([(real*100 + 150),(150 - imj*100)]);
+        // let sq= a[0]*a[0]+a[1]*a[1];
+        // p.push([(a[0]*100 + 150),(150 - a[1]*100)]);
+        // let real = a[0] / sq ;
+        // let imj =  a[1] / sq ;
+        // z.push([(real*100 + 150),(150 - imj*100)]);
+        let apf  =getapfzap(a[0],a[1]);
+        // console.log(apf[0]);
+        // console.log(apf[1]);
+
+      
+        let p = [getvalues(apf[1])];
+        let z = [getvalues(apf[0])];
+
+
         let w=[];let y_phase=[];
 
         $.ajax({
@@ -234,3 +275,8 @@ async function updateFilterPhase(allPassCoeff){
             layout,
            { staticPlot: true })
       }
+
+
+function deleteA(a1,a2){
+
+}      

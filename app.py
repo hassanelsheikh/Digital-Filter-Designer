@@ -158,13 +158,12 @@ signal = [1 for i in range(15)]
 
 @app.route('/applyFilter', methods=['POST'])
 def applyFilter():
-        global Dfilter
         jsonData = request.get_json()
         input_point = float(jsonData['signalPoint'])
         signal.append(input_point)
-        if len(signal) >  2 * Dfilter.filterOrder and len(signal)>50:
-            del signal[0:Dfilter.filterOrder]
-        output_signal = Dfilter.applyFilter(signal)
+        if len(signal) >  2 * logic.filterOrder and len(signal)>50:
+            del signal[0:logic.filterOrder]
+        output_signal = logic.applyFilter(signal)
         output_point = output_signal[-1]
         
         return [float(output_point)] 

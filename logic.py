@@ -1,13 +1,19 @@
 import numpy as np
 import scipy
 import scipy.signal
+from scipy import signal
+
 
 class Logic():
     def __init__(self) -> None:
         self.zeros=[]
         self.poles=[]
-        self.gain = 0.5
+        self.gain = 1
         self.allPassCoeffients= []
+        self.filterOrder = max(len(self.zeros), len(self.poles))
+        self.b , self.a  = signal.zpk2tf(self.zeros, self.poles, self.gain) 
+
+
         
         
         
@@ -98,3 +104,10 @@ class Logic():
         validcomplex= a.replace("i", "j") 
         converted_a = complex(validcomplex)
         return converted_a
+    
+    def applyFilter(self, input_signal):
+        if self.filterOrder<1 :
+            return input_signal
+        
+        output_signal = signal.lfilter(self.b, self.a, input_signal)
+        return output_signal

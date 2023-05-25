@@ -92,3 +92,21 @@ function importSignal() {
       }
 
     
+      let update_output = (signalPoint)=>{
+        let signalOutput
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:5000//applyFilter',
+            data: JSON.stringify({signalPoint}),
+            cache: false,
+            dataType: 'json',
+            async: false,
+            contentType: 'application/json',
+            processData: false,
+            success: function(data) {
+                signalOutput = data[0];
+              
+            },
+        });
+        return signalOutput
+    }

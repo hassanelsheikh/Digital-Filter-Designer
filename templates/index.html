@@ -198,15 +198,20 @@
 <div id="upl">
 <div>
     <div class="upload">
-        <label for="sig" class="file-upload-button">Browse Signal</label>
-        <input type="file"
-               id="sig" name="signal"
-               accept=".xlsx, .xls, .csv" oninput="importSignal()">
+        <div class="mb-3">
+            <input class="form-control" type="file" id="sig" name="signal"
+            accept=".xlsx, .xls, .csv" oninput="importSignal()">
+          </div>
+
+               
     </div><br>
-    <label for="sampling" id="noiselabel">Filtering speed:</label>
+    <div>
+        <label for="sampling" id="noiselabel">Filtering speed:</label>
 
     <input type="range" min="0" max="60" value="1" class="slider" id="sampling"><br>
-            Filtering rate : <span id="SROutput"></span>
+            <p id="filtering rate" class="text-center">Filtering rate : <span id="SROutput"></span></p>
+    </div>
+    
 
 </div>
 

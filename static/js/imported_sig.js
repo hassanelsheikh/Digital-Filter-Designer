@@ -95,7 +95,6 @@ function importSignal() {
                 x.push(d[keys[0]]);
                 y.push(d[keys[1]]);
             });
-            layout = {xaxis:{range:[0,5]}}
             Plotly.newPlot(inputGraph, [{y:[],x:[], type:'line'}], {layout})
             Plotly.newPlot(outputGraph, [{y:[],x:[], type:'line'}], {layout})
             t = 0

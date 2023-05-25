@@ -128,6 +128,7 @@ function addItem2(a,n){
             let a = getapfzap(r,im);
             let z = getvalues(a[0]);
             let p = getvalues(a[1]);
+            console.log(z,p);
            deleteA(z,p);//to be done bas ana msh ader
             
             
@@ -162,16 +163,16 @@ async function updateFilterPhase(allPassCoeff){
         [{x: w, y: allPassAngels}],layout, { staticPlot: true })
     }
 
-    function updateAllPassCoeff(){
-        let allPassCoeff = []
-        document.querySelectorAll('.target1').forEach(item => {
-            let aValue = (item.dataset.avalue)
-            console.log(aValue)
-            let checked = item.checked
-            if (checked) allPassCoeff.push(aValue)
-        })
-        updateFilterPhase(allPassCoeff)
-    }
+    // function updateAllPassCoeff(){
+    //     let allPassCoeff = []
+    //     document.querySelectorAll('.target1').forEach(item => {
+    //         let aValue = (item.dataset.avalue)
+    //         console.log(aValue)
+    //         let checked = item.checked
+    //         if (checked) allPassCoeff.push(aValue)
+    //     })
+    //     updateFilterPhase(allPassCoeff)
+    // }
 
     function review(){
         const real=parseFloat(document.querySelector('#real').value);
@@ -240,20 +241,10 @@ async function updateFilterPhase(allPassCoeff){
 
       function applyAPF(a){
 
-        // let sq= a[0]*a[0]+a[1]*a[1];
-        // p.push([(a[0]*100 + 150),(150 - a[1]*100)]);
-        // let real = a[0] / sq ;
-        // let imj =  a[1] / sq ;
-        // z.push([(real*100 + 150),(150 - imj*100)]);
+        
         let apf  =getapfzap(a[0],a[1]);
-        // console.log(apf[0]);
-        // console.log(apf[1]);
-
-      
         let p = [getvalues(apf[1])];
         let z = [getvalues(apf[0])];
-
-
         let w=[];let y_phase=[];
 
         $.ajax({
@@ -299,6 +290,11 @@ async function updateFilterPhase(allPassCoeff){
               y_phase = data[1];
               Plotly.newPlot(
                 final,
+                [{ x: w, y: y_phase, line: { color: 'red' } }, ],
+                layout,
+               { staticPlot: true })
+               Plotly.newPlot(
+                filterDesignPhase,
                 [{ x: w, y: y_phase, line: { color: 'red' } }, ],
                 layout,
                { staticPlot: true })

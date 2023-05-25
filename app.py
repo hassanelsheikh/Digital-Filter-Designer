@@ -135,13 +135,20 @@ def deletecomp():
         poles = jsonData['poles']
 
         print(zeros)
+        print(poles)
         print(logic.zeros)
+        print(logic.poles)
+
 
         # Delete zeros from logic.zeros
         logic.zeros = [zero for zero in logic.zeros if zero not in zeros]
 
         # Delete poles from logic.poles
         logic.poles = [pole for pole in logic.poles if pole not in poles]
+        print("new shit")
+        print(logic.zeros)
+        print(logic.poles)
+        
 
         w, h_phase, magnitude = logic.frequencyResponse()
         return [w.tolist(), h_phase.tolist()]

@@ -278,6 +278,7 @@ const s = (p5_inst) => {
         }
 
         addItem(p, mode) {
+            // console.log(mode);
             if (mode == Mode.ZERO)
             {
                 this.#addZero(p)
@@ -289,7 +290,7 @@ const s = (p5_inst) => {
             else if (mode == Mode.POLE)
             {
                 this.#addPole(p)
-                if(isChecked) this.#addConjugatePole(p)
+                if(isChecked) {this.#addConjugatePole(p)}
             } 
             curr_picked = NONE_PICKED
         }
@@ -300,11 +301,15 @@ const s = (p5_inst) => {
             if (index < 0) return
             this.items.splice(index, 1)
             p5_inst.redraw()
+            updateFilterDesign(this.getZerosPoles(radius))
+
         }
 
         clearAll() {
             this.items = [];
             p5_inst.redraw();
+            updateFilterDesign(this.getZerosPoles(radius))
+
         }
          
 

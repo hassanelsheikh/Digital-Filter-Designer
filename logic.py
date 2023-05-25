@@ -10,10 +10,10 @@ class Logic():
         self.poles=[]
         self.gain = 1
         self.allPassCoeffients= []
-        self.filterOrder = max(len(self.zeros), len(self.poles))
         self.b , self.a  = signal.zpk2tf(self.zeros, self.poles, self.gain) 
+        self.filterOrder = max(len(self.zeros), len(self.poles))
 
-
+    
         
         
         
@@ -60,36 +60,36 @@ class Logic():
 
 
     # Applying the filter to the signal
-    def apply_filter(self, signal):
-        b, a= scipy.signal.zpk2tf(self.zeros, self.poles, self.gain)
-        output= scipy.signal.lfilter(b, a, signal)
-        return output.real
+    # def apply_filter(self, signal):
+    #     b, a= scipy.signal.zpk2tf(self.zeros, self.poles, self.gain)
+    #     output= scipy.signal.lfilter(b, a, signal)
+    #     return output.real
 
 
 
     # Get zeros and poles from upper circle
-    def getfrompair(self):
-        zero= (int(len(self.zeros)/2))*[0]
-        pole= (int(len(self.poles)/2))*[0]
-        k= self.gain
-        if len(self.zeros)==1:
-            zero=self.zeros
-        if len(self.poles)==1:
-            pole=self.poles 
-        cnt1,cnt2= 0,0
-        for z in self.zeros: 
-            check= np.sign(z.imag)
-            if check!= -1:
-                zero[cnt1]= z
-                cnt1+=1
-        for p in self.poles: 
-            check= np.sign(p.imag)
-            if check!= -1:
-                pole[cnt2]= p
-                cnt2+=1
-        # zero= (len(self.zeros))*[0]
-        # pole= (len(self.zeros))*[0]
-        return zero,pole,k
+    # def getfrompair(self):
+    #     zero= (int(len(self.zeros)/2))*[0]
+    #     pole= (int(len(self.poles)/2))*[0]
+    #     k= self.gain
+    #     if len(self.zeros)==1:
+    #         zero=self.zeros
+    #     if len(self.poles)==1:
+    #         pole=self.poles 
+    #     cnt1,cnt2= 0,0
+    #     for z in self.zeros: 
+    #         check= np.sign(z.imag)
+    #         if check!= -1:
+    #             zero[cnt1]= z
+    #             cnt1+=1
+    #     for p in self.poles: 
+    #         check= np.sign(p.imag)
+    #         if check!= -1:
+    #             pole[cnt2]= p
+    #             cnt2+=1
+    #     # zero= (len(self.zeros))*[0]
+    #     # pole= (len(self.zeros))*[0]
+    #     return zero,pole,k
 
 
     def getzeroandpole(self,a):

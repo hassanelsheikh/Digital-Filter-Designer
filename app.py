@@ -4,33 +4,11 @@ from flask_cors import CORS, cross_origin
 import numpy as np
 from logic import Logic
 from scipy import signal
+import scipy.signal
 
 logic = Logic()
 
-class  DigitalFilter:
-    
-    def __init__(self, z, p, k):
-        
-        self.zeros = z
-        self.poles = p
-        self.gain = k 
-        self.b , self.a  = signal.zpk2tf(self.zeros, self.poles, self.gain) 
-        self.filterOrder = max(len(self.zeros), len(self.poles))
-        
-           
-    def filterResponse(self):
-        w, h = signal.freqz_zpk(self.zeros, self.poles, self.gain)
-        h_mag = 20 * np.log10(abs(h))
-        h_phase = np.unwrap(np.angle(h))
-        w = [round(x, 3) for x in w]
-        return w, h_mag, h_phase     
-        
-    def applyFilter(self, input_signal):
-        if self.filterOrder<1 :
-            return input_signal
-        
-        output_signal = signal.lfilter(self.b, self.a, input_signal)
-        return output_signal
+
         
 
 output= [0]
@@ -55,6 +33,8 @@ def getFrequencyResponce():
         logic.zeros = logic.parseToComplex(zerosAndPoles['zeros'])
         logic.poles = logic.parseToComplex(zerosAndPoles['poles'])
         logic.gain = zerosAndPoles['gain']
+        logic.b , logic.a  = scipy.signal.zpk2tf(logic.zeros, logic.poles, logic.gain) 
+        logic.filterOrder = max(len(logic.zeros), len(logic.poles))
         w, filterangles, magnitude = logic.frequencyResponse()
         filterangles= np.add(allPassAngles, filterangles)
     
@@ -120,6 +100,8 @@ def modifiefilter():
         logic.zeros=(logic.zeros)+z
         logic.poles=(logic.poles)+p
         logic.gain=1
+        logic.b , logic.a  = scipy.signal.zpk2tf(logic.zeros, logic.poles, logic.gain) 
+        logic.filterOrder = max(len(logic.zeros), len(logic.poles))
         w, h_phase, magnitude = logic.frequencyResponse()
 
     

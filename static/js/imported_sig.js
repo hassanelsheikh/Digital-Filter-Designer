@@ -4,6 +4,35 @@ const fileInput = document.getElementById('sig');
 const inputGraph = document.getElementById('input_sig')
 const outputGraph = document.getElementById('output_sig')
 
+layout ={
+    paper_bgcolor:"white",
+    plot_bgcolor:"white",
+    autosize: false,
+    width:500,
+    height:250,
+
+    margin: {
+      l: 30,
+      r: 0,
+      b: 20,
+      t: 10,
+      pad: 0
+    }
+}
+
+Plotly.newPlot(
+    inputGraph,
+    [{ x: [], y: [], line: { color: 'red' } } ],
+    layout,
+   { staticPlot: true })
+    
+Plotly.newPlot(
+    outputGraph,
+    [{ x: [], y: [], line: { color: 'red' } }, ],
+    layout,
+   { staticPlot: true })
+
+
 fileInput.addEventListener('change', importSignal);
 function importSignal() {
     // Get the selected file
@@ -39,16 +68,14 @@ function importSignal() {
         reader.readAsText(file);
     }
 
-    let plot_input_Output = (inputPoint, outputPoint, t)=>{
-
-        Plotly.extendTraces(inputGraph, {y:[[inputPoint]], x:[[t]]}, [0])
-        Plotly.extendTraces(outputGraph, {y:[[outputPoint]], x:[[t]]}, [0])
-        // t+=0.02
-        range = {range:[t-4.5, t+0.5]}
-         layout['xaxis']= range
-        if(t>4.5){
-            Plotly.relayout(inputGraph, layout)
-            Plotly.relayout(outputGraph, layout)
+    let plot_input_Output = (inputPoint, outputPoint, t) => {
+        Plotly.extendTraces(inputGraph, { y: [[inputPoint]], x: [[t]] }, [0]);
+        Plotly.extendTraces(outputGraph, { y: [[outputPoint]], x: [[t]] }, [0]);
+    
+        if (t > 4.5) {
+            let newRange = { xaxis: { range: [t - 4.5, t + 0.5] } };
+            Plotly.relayout(inputGraph, newRange);
+            Plotly.relayout(outputGraph, newRange);
         }
     }
 
@@ -69,8 +96,8 @@ function importSignal() {
                 y.push(d[keys[1]]);
             });
             layout = {xaxis:{range:[0,5]}}
-            Plotly.newPlot(inputGraph, [{y:[],x:[], type:'line'}], {xaxis:{range:[0,5]}, title:"input signal"})
-            Plotly.newPlot(outputGraph, [{y:[],x:[], type:'line'}], {xaxis:{range:[0,5]}, title:"Filtered signal"})
+            Plotly.newPlot(inputGraph, [{y:[],x:[], type:'line'}], {layout})
+            Plotly.newPlot(outputGraph, [{y:[],x:[], type:'line'}], {layout})
             t = 0
             i = 0
             // if(working){

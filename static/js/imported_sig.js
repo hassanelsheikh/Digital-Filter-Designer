@@ -22,13 +22,13 @@ layout ={
 
 Plotly.newPlot(
     inputGraph,
-    [{ x: [], y: [], line: { color: 'red' } } ],
+    [{ x: [], y: [], line: { color: 'blue' } } ],
     layout,
    { staticPlot: true })
     
 Plotly.newPlot(
     outputGraph,
-    [{ x: [], y: [], line: { color: 'red' } }, ],
+    [{ x: [], y: [], line: { color: 'blue' } }, ],
     layout,
    { staticPlot: true })
 
@@ -95,8 +95,6 @@ function importSignal() {
                 x.push(d[keys[0]]);
                 y.push(d[keys[1]]);
             });
-            Plotly.newPlot(inputGraph, [{y:[],x:[], type:'line'}], {layout})
-            Plotly.newPlot(outputGraph, [{y:[],x:[], type:'line'}], {layout})
             t = 0
             i = 0
             // if(working){

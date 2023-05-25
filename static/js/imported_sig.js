@@ -47,6 +47,9 @@ Plotly.newPlot(
 fileInput.addEventListener('change', importSignal);
 function importSignal() {
     // Get the selected file
+    const Time = [];
+const Amplitude = [];
+
     const fileInput = document.getElementById('sig');
     const file = fileInput.files[0];
 
@@ -89,8 +92,27 @@ function importSignal() {
             Plotly.relayout(outputGraph, newRange);
         }
     }
+    let working = false;
+    let interval;
 
     fileInput.onchange = (e)=>{
+        if(working){
+
+            clearInterval(interval);
+            working = false;
+            Plotly.newPlot(
+                inputGraph,
+                [{ x: [], y: [], line: { color: 'blue' } } ],
+                layout,
+               { staticPlot: true })
+                
+            Plotly.newPlot(
+                outputGraph,
+                [{ x: [], y: [], line: { color: 'blue' } }, ],
+                layout,
+               { staticPlot: true })
+        }
+
         let x = [];
         let y = [];
         // let speed =SRSLider.value;
@@ -109,10 +131,10 @@ function importSignal() {
             });
             t = 0
             i = 0
-            // if(working){
-            //     clearInterval(interval)
-            // }
-            // working = true
+            if(working){
+                clearInterval(interval)
+            }
+            working = true
             interval = setInterval(()=>{
                 if(i<y.length){
                     let filtered_point = update_output(y[i]);

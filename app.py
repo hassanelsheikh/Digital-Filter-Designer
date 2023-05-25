@@ -3,8 +3,35 @@ import json
 from flask_cors import CORS, cross_origin
 import numpy as np
 from logic import Logic
+from scipy import signal
 
 logic = Logic()
+
+class  DigitalFilter:
+    
+    def __init__(self, z, p, k):
+        
+        self.zeros = z
+        self.poles = p
+        self.gain = k 
+        self.b , self.a  = signal.zpk2tf(self.zeros, self.poles, self.gain) 
+        self.filterOrder = max(len(self.zeros), len(self.poles))
+        
+           
+    def filterResponse(self):
+        w, h = signal.freqz_zpk(self.zeros, self.poles, self.gain)
+        h_mag = 20 * np.log10(abs(h))
+        h_phase = np.unwrap(np.angle(h))
+        w = [round(x, 3) for x in w]
+        return w, h_mag, h_phase     
+        
+    def applyFilter(self, input_signal):
+        if self.filterOrder<1 :
+            return input_signal
+        
+        output_signal = signal.lfilter(self.b, self.a, input_signal)
+        return output_signal
+        
 
 output= [0]
 allpasszeros, allpasspoles= [],[]
@@ -118,6 +145,22 @@ def deletecomp():
 
         w, h_phase, magnitude = logic.frequencyResponse()
         return [w.tolist(), h_phase.tolist()]
+    
+
+signal = [1 for i in range(15)]
+
+@app.route('/applyFilter', methods=['POST'])
+def applyFilter():
+        global Dfilter
+        jsonData = request.get_json()
+        input_point = float(jsonData['signalPoint'])
+        signal.append(input_point)
+        if len(signal) >  2 * Dfilter.filterOrder and len(signal)>50:
+            del signal[0:Dfilter.filterOrder]
+        output_signal = Dfilter.applyFilter(signal)
+        output_point = output_signal[-1]
+        
+        return [float(output_point)] 
 
 
         

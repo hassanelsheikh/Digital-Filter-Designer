@@ -6,10 +6,10 @@ const checkList = document.getElementById('apflist');
 let p=[];
 let z=[];
 layout = {
-        paper_bgcolor:"#efefef",
-        plot_bgcolor:"#efefef",
+        paper_bgcolor:"#white",
+        plot_bgcolor:"#white",
         autosize: false,
-        width:600,
+        width:500,
         height:250,
 
         margin: {
@@ -305,4 +305,23 @@ async function updateFilterPhase(allPassCoeff){
             },
         });
 
-    }      
+    }
+    
+    let update_output = (signalPoint)=>{
+        let signalOutput
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:5000//applyFilter',
+            data: JSON.stringify({signalPoint}),
+            cache: false,
+            dataType: 'json',
+            async: false,
+            contentType: 'application/json',
+            processData: false,
+            success: function(data) {
+                signalOutput = data[0];
+              
+            },
+        });
+        return signalOutput
+    }

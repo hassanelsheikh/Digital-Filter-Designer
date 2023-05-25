@@ -49,7 +49,7 @@
             <div class="apfres">
                 <div id="form">
                     <form class="login-form"  action="javascript:void(0);">
-                        <h1> a </h1>
+                        <h1> </h1>
                         <div class="form-input-material">
                         <input type="number"  id="real" name="real" placeholder="Real" autocomplete="off" class="form-control-material"  />
                         </div>
@@ -60,9 +60,19 @@
                         <button type="submit" class="btn btn-primary btn-ghost" id="formbtn" onclick="addItem2([],1)" >Apply</button>
                     </form>
                 </div>
-    
-                <div class="content" id="filteredphaseres"></div>
-                <div class="content" id="finalfilteredphaseres"></div>
+                
+                <div>
+                    <p class="h2 text-light">Review Phase<p>
+                    <div class="content" id="filteredphaseres">
+                    
+                    </div>
+                    <div>
+                        <p class="h2 text-light">Final Phase<p>
+                        <div class="content" id="finalfilteredphaseres"></div>
+                    </div>
+                    
+                </div>
+                
 
                 <div id="apflist">
                     <ul id="list"></ul>
@@ -127,35 +137,34 @@
 
     <div class="cir_container" id="cir">
     
-    <div id="cont">
-        <div class="element_div2" > 
-            <div class="toggle-div" id="design-unit-circle" style="margin-right: 10px;">
-            <div id='circle-control' class="button-element">
-                <button id= "zero" class="btn-cricle-control mode-control">Add Zeros</button>
-            </div>
-            <div class="button-element dark-button">
-            <button id="pole" class="btn-cricle-control mode-control" >Add Poles</button>
-            </div>
-    
-            </div>
-            <div  class="button-remove" onclick="remove(this)" style="margin-left: 10px;">
-                <button id="remove" >Delete</button>
-            </div>
-            <div  class="button-clear" style="margin-left: 10px;">
-                <button id="clear" >Clear All</button>
-            </div>
-            <div  class="button-clear" style="margin-left: 10px;">
-                <button id="clearzeros" >Clear zeros</button>
-            </div>
-            <div  class="button-clear" style="margin-left: 10px;">
-                <button id="clearpoles" >Clear poles</button>
-            </div>
-            <div  class="button-conj" style="margin-left: 10px;">
+        <div id="cont">
+            <div class="element_div2 control-panel">
+              <div class="toggle-div" id="design-unit-circle">
+                <div id="circle-control" class="button-element">
+                  <button id="zero" class="btn btn-dark">Add Zeros</button>
+                </div>
+                <div class="button-element dark-button">
+                  <button id="pole" class="btn btn-dark">Add Poles</button>
+                </div>
+              </div>
+              <div class="button-remove" onclick="remove(this)">
+                <button class="btn btn-dark" id="remove">Delete</button>
+              </div>
+              <div class="button-clear">
+                <button class="btn btn-dark" id="clear">Clear All</button>
+              </div>
+              <div class="button-clear">
+                <button class="btn btn-dark" id="clearzeros">Clear Zeros</button>
+              </div>
+              <div class="button-clear">
+                <button class="btn btn-dark" id="clearpoles">Clear Poles</button>
+              </div>
+              <div class="button-conj">
                 <input type="checkbox" id="conj">
-                <label for="conj">Conjucate</label>
+                <label for="conj">Conjugate</label>
+              </div>
             </div>
-    
-        </div>
+          </div>
     
         
         <div class="element_div3" id="circle-canvas"> 
@@ -167,13 +176,13 @@
         
         <div id="mag-phase">
             <div class="element div6 lightel">
-                <h2>Phase Response</h2>
+                <p class="h2 text-dark text-center">Phase Response<p>
                 <div id="filter-phase-response" class="response-plotting"> </div>
                  
             </div>
         
             <div class="element_div7_darkel">
-                <h2>Magnitude Response</h2>
+                <h2 class="text-dark text-center">Magnitude Response</h2>
         
                 <div id="filter-mag-response" class="response-plotting"> </div>
             </div>
@@ -193,6 +202,17 @@
                id="sig" name="signal"
                accept=".xlsx, .xls, .csv" oninput="importSignal()">
     </div><br>
+</div>
+
+<div class="input_output">
+    <div id="input_sig">
+
+    </div>
+
+    <div id="output_sig">
+
+    </div>
+
 </div>
 
 </div>

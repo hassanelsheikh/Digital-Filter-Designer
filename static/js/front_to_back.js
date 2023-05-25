@@ -5,7 +5,7 @@ layout ={
     paper_bgcolor:"white",
     plot_bgcolor:"white",
     autosize: false,
-    width:400,
+    width:500,
     height:250,
 
     margin: {

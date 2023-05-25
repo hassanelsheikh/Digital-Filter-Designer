@@ -152,7 +152,7 @@ img {
       1px 0 2.1px 2.1px rgba(128, 128, 128, 0.195),
       1px 0 4.4px 4.4px rgba(128, 128, 128, 0.241),
       1px 0 12px 12px rgba(128, 128, 128, 0.35);
-      margin-top: 5px;
+      margin-top: 200px;
   }
   
   .form-input-material {
@@ -164,9 +164,6 @@ img {
     width: 450px !important;
     height: 250px;
     grid-area: filteredphaseres;
-    margin-left: 10px;
-    margin: 20px;
-    margin-top: 55px;
   
   }
   
@@ -256,7 +253,10 @@ img {
 
   #cir{
     display: flex;
-    border: 1px solid black;
+    border: 2px solid black;
+    box-shadow: rgb(0, 0, 0)  1px 1px 4px;
+    margin-top: 200px;
+    border-radius: 8px;
   }
   
   .overlay a {
@@ -290,9 +290,26 @@ img {
     margin-left: 10px;
   }
   .element_div7_darkel{
-    margin-left: 50px;
+    
+    margin-left: 100px;
   }
   #cont{
     display: flex;
     margin: 10px;
+  }
+
+html * {
+    font-family:Arial, Helvetica, sans-serif
+  }
+  .control-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .control-panel button {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 5px;
   }

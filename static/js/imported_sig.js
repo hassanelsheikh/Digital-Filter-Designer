@@ -3,6 +3,17 @@ const Amplitude = [];
 const fileInput = document.getElementById('sig');
 const inputGraph = document.getElementById('input_sig')
 const outputGraph = document.getElementById('output_sig')
+var SRSLider = document.getElementById("sampling");
+var SROutput = document.getElementById("SROutput");
+
+SROutput.innerHTML = SRSLider.value;
+// SROutput.innerHTML = SRSLider.value ;
+///showing sampling rate
+SRSLider.oninput = () => {
+    SROutput.innerHTML = SRSLider.value ;
+  };
+
+
 
 layout ={
     paper_bgcolor:"white",
@@ -82,6 +93,7 @@ function importSignal() {
     fileInput.onchange = (e)=>{
         let x = [];
         let y = [];
+        // let speed =SRSLider.value;
         let file = e.target.files[0];
         // let data = d3.csvParse(file);
         var reader = new FileReader();
@@ -121,7 +133,7 @@ function importSignal() {
         $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:5000//applyFilter',
-            data: JSON.stringify({signalPoint}),
+            data: JSON.stringify({signalPoint}),////speed
             cache: false,
             dataType: 'json',
             async: false,

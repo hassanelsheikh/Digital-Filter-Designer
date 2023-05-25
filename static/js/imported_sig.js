@@ -123,7 +123,7 @@ function importSignal() {
                     clearInterval(interval)
                     working = false
                 }
-            }, 100)
+            }, 110-SRSLider.value)
       }
       }
 

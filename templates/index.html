@@ -203,6 +203,11 @@
                id="sig" name="signal"
                accept=".xlsx, .xls, .csv" oninput="importSignal()">
     </div><br>
+    <label for="sampling" id="noiselabel">Filtering speed:</label>
+
+    <input type="range" min="0" max="60" value="1" class="slider" id="sampling"><br>
+            Filtering rate : <span id="SROutput"></span>
+
 </div>
 
 <div class="input_output">

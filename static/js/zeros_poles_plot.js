@@ -321,6 +321,7 @@ const s = (p5_inst) => {
                  this.items.splice(key,1);
 }
               }
+              updateFilterDesign(this.getZerosPoles(radius))
 
               p5_inst.redraw();
 
@@ -334,7 +335,7 @@ const s = (p5_inst) => {
 
                 }
               }
-             console.log(this.items);
+              updateFilterDesign(this.getZerosPoles(radius))
 
               p5_inst.redraw();
         }

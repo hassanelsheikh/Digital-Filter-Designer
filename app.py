@@ -33,7 +33,7 @@ def getFrequencyResponce():
         logic.zeros = logic.parseToComplex(zerosAndPoles['zeros'])
         logic.poles = logic.parseToComplex(zerosAndPoles['poles'])
         logic.gain = zerosAndPoles['gain']
-        logic.b , logic.a  = scipy.signal.zpk2tf(logic.zeros, logic.poles, logic.gain) 
+        logic.b , logic.a  = scipy.signal.zpk2tf(logic.zeros, logic.poles, logic.gain) #transform to difference equation
         logic.filterOrder = max(len(logic.zeros), len(logic.poles))
         w, filterangles, magnitude = logic.frequencyResponse()
         filterangles= np.add(allPassAngles, filterangles)
@@ -127,7 +127,6 @@ def deletecomp():
 
         # Delete poles from logic.poles
         logic.poles = [pole for pole in logic.poles if pole not in poles]
-        print("new shit")
         print(logic.zeros)
         print(logic.poles)
         
